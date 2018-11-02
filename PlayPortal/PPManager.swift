@@ -185,7 +185,7 @@ class PPManager {
                         }
                     PPManager.sharedInstance.PPdatasvc.openBucket(bucketName:PPManager.sharedInstance.PPusersvc.getMyAppGlobalDataStorageName(), users:[], isPublic:true) { succeeded, response, img in
                             print("getProfileAndBucket openBucket (global) succeeded: \( succeeded)" )
-                    }
+                }
                 }
                 handler("nil")                
             }

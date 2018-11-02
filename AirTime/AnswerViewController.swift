@@ -42,17 +42,17 @@ class AnswerViewController: UIViewController {
                 questions[currentQuestion].id: score
             ])
             
-            print(bucket.toJSON)
-            print()
-            
             PPManager.sharedInstance.PPdatasvc.writeBucket(
                 bucketName:PPManager.sharedInstance.PPusersvc.getMyDataStorageName(),
                 key:"TeamInfo",
                 value:bucket.toJSON) { _, _, _ in }
+            
+            PPLeaderboardService().updateLeaderboard(score: (bucket.score + 1) as NSNumber, categories: []) { _, _, _ in }
         }
         
         if currentQuestion + 1 >= questions.count {
-            print()
+            guard let leaderboard = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "leaderboard") as? LeaderboardTableViewController else { return }
+            present(leaderboard, animated: true, completion: nil)
         } else {
             guard let multiChoice = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "multiChoice") as? MultiChoiceQuestionViewController else {
                 return

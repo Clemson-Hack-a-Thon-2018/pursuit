@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		1B42BE0FAC4E3E9EDC0F186A /* libPods-AirTime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAFF547673389EFA79D3625 /* libPods-AirTime.a */; };
 		1C3211302178FA3D00785D38 /* ShortFormPrivacyPolicyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C32112F2178FA3D00785D38 /* ShortFormPrivacyPolicyTableViewController.swift */; };
-		1C3211322179120D00785D38 /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3211312179120D00785D38 /* LeaderboardTableViewController.swift */; };
-		1C47FE742179FEB300CD2B27 /* LeadboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C47FE732179FEB300CD2B27 /* LeadboardTableViewCell.swift */; };
 		1C57FFA1218C8564001F5BE9 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57FFA0218C8564001F5BE9 /* Keys.swift */; };
 		1C57FFA3218C8B23001F5BE9 /* MultiChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57FFA2218C8B23001F5BE9 /* MultiChoiceQuestionViewController.swift */; };
 		1C57FFA5218C8B2F001F5BE9 /* CorrectAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57FFA4218C8B2F001F5BE9 /* CorrectAnswerViewController.swift */; };
 		1C57FFA7218C8B3C001F5BE9 /* IncorrectAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57FFA6218C8B3C001F5BE9 /* IncorrectAnswerViewController.swift */; };
 		1C57FFA9218C9E7B001F5BE9 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57FFA8218C9E7B001F5BE9 /* AnswerViewController.swift */; };
+		1C57FFAB218CB3A6001F5BE9 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57FFAA218CB3A6001F5BE9 /* LeaderboardTableViewCell.swift */; };
+		1C57FFAD218CB61E001F5BE9 /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57FFAC218CB61E001F5BE9 /* LeaderboardTableViewController.swift */; };
 		466604AB2177B89D007D189A /* PPLeaderboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466604AA2177B89D007D189A /* PPLeaderboardService.swift */; };
 		4669F1F42146BFB000769F88 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4669F1F32146BFB000769F88 /* LoginViewController.swift */; };
 		4669F1F62146BFE700769F88 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4669F1F52146BFE700769F88 /* Security.framework */; };
@@ -165,13 +165,13 @@
 /* Begin PBXFileReference section */
 		0D6557AF1E65C97E00A21FCE /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		1C32112F2178FA3D00785D38 /* ShortFormPrivacyPolicyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortFormPrivacyPolicyTableViewController.swift; sourceTree = "<group>"; };
-		1C3211312179120D00785D38 /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
-		1C47FE732179FEB300CD2B27 /* LeadboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadboardTableViewCell.swift; sourceTree = "<group>"; };
 		1C57FFA0218C8564001F5BE9 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		1C57FFA2218C8B23001F5BE9 /* MultiChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiChoiceQuestionViewController.swift; sourceTree = "<group>"; };
 		1C57FFA4218C8B2F001F5BE9 /* CorrectAnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectAnswerViewController.swift; sourceTree = "<group>"; };
 		1C57FFA6218C8B3C001F5BE9 /* IncorrectAnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncorrectAnswerViewController.swift; sourceTree = "<group>"; };
 		1C57FFA8218C9E7B001F5BE9 /* AnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
+		1C57FFAA218CB3A6001F5BE9 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
+		1C57FFAC218CB61E001F5BE9 /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		1CBE9FAB218777C400A2D29C /* libPods-AirTime WatchKit App Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-AirTime WatchKit App Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24AFD5E51D7FFD01E8072F19 /* libPods-AirTime WatchKit App Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirTime WatchKit App Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A8AC7C841FC30F8C8A1D072 /* Pods-AirTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirTime.release.xcconfig"; path = "Target Support Files/Pods-AirTime/Pods-AirTime.release.xcconfig"; sourceTree = "<group>"; };
@@ -558,13 +558,13 @@
 				0D6557AF1E65C97E00A21FCE /* BridgingHeader.h */,
 				5077E1242146F8AE00B0E0FA /* TimeInterval+Time.swift */,
 				1C32112F2178FA3D00785D38 /* ShortFormPrivacyPolicyTableViewController.swift */,
-				1C3211312179120D00785D38 /* LeaderboardTableViewController.swift */,
-				1C47FE732179FEB300CD2B27 /* LeadboardTableViewCell.swift */,
 				1C57FFA0218C8564001F5BE9 /* Keys.swift */,
 				1C57FFA2218C8B23001F5BE9 /* MultiChoiceQuestionViewController.swift */,
 				1C57FFA4218C8B2F001F5BE9 /* CorrectAnswerViewController.swift */,
 				1C57FFA6218C8B3C001F5BE9 /* IncorrectAnswerViewController.swift */,
 				1C57FFA8218C9E7B001F5BE9 /* AnswerViewController.swift */,
+				1C57FFAA218CB3A6001F5BE9 /* LeaderboardTableViewCell.swift */,
+				1C57FFAC218CB61E001F5BE9 /* LeaderboardTableViewController.swift */,
 			);
 			path = AirTime;
 			sourceTree = "<group>";
@@ -823,7 +823,6 @@
 			files = (
 				A322BB981DFEA7C400C847AF /* AppDelegate.swift in Sources */,
 				508C66862142F06B0059C591 /* GradientBkgndView.swift in Sources */,
-				1C3211322179120D00785D38 /* LeaderboardTableViewController.swift in Sources */,
 				46AE4F3F216BE9C6007F8478 /* PPUserService.swift in Sources */,
 				466604AB2177B89D007D189A /* PPLeaderboardService.swift in Sources */,
 				6E5439A92142C4E30052B060 /* Colors.swift in Sources */,
@@ -833,15 +832,16 @@
 				46AE4F40216BE9C6007F8478 /* PPDataService.swift in Sources */,
 				1C57FFA9218C9E7B001F5BE9 /* AnswerViewController.swift in Sources */,
 				46AE4F3C216BE9C6007F8478 /* PPManager.swift in Sources */,
+				1C57FFAB218CB3A6001F5BE9 /* LeaderboardTableViewCell.swift in Sources */,
 				508C66882142FBF60059C591 /* SettingsTableTableViewController.swift in Sources */,
 				46AE4F42216BE9C6007F8478 /* PPUtils.swift in Sources */,
+				1C57FFAD218CB61E001F5BE9 /* LeaderboardTableViewController.swift in Sources */,
 				4669F1F42146BFB000769F88 /* LoginViewController.swift in Sources */,
 				508C66802142C1AA0059C591 /* HomeViewController.swift in Sources */,
 				73A7E920218BF61F0001AAE6 /* Data.swift in Sources */,
 				1C57FFA1218C8564001F5BE9 /* Keys.swift in Sources */,
 				5077E1252146F8AE00B0E0FA /* TimeInterval+Time.swift in Sources */,
 				46AE4F3E216BE9C6007F8478 /* KeychainWrapper.swift in Sources */,
-				1C47FE742179FEB300CD2B27 /* LeadboardTableViewCell.swift in Sources */,
 				46AE4F41216BE9C6007F8478 /* RemoteNotificationsHandler.swift in Sources */,
 				6E1B37C62146AFA000F01300 /* Utils.swift in Sources */,
 				1C3211302178FA3D00785D38 /* ShortFormPrivacyPolicyTableViewController.swift in Sources */,

@@ -399,6 +399,7 @@ class PPWebApi {
             case .success:
                     completion(true, response, response.value)
             case .failure(let error):
+                print(response.response?.allHeaderFields)
                 print("writeBucket error: \( error )" )
                 completion(false, nil, nil)
             }

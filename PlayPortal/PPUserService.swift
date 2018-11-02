@@ -256,7 +256,7 @@ class PPUserService {
     }
     
     func getMyAppGlobalDataStorageName() -> String {
-        return "globalAppData@" + getAppNameFromBundle()
+        return "globalAppData@" + "ClemsonPursuit"
     }
     
 

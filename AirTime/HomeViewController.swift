@@ -26,6 +26,8 @@ class HomeViewController: UIViewController, SKStoreProductViewControllerDelegate
     
     var teamName: String?
     
+    var user: PPUserObject!
+    
     @IBAction func goTapped(_ sender: UIButton) {
         guard let teamName = teamName, !teamName.isEmpty else {
             let alert = UIAlertController(title: "Hold up!", message: "You must enter a team name before starting!", preferredStyle: .alert)
@@ -63,6 +65,25 @@ class HomeViewController: UIViewController, SKStoreProductViewControllerDelegate
                 key:"TeamInfo",
                 value:bucket.toJSON) { _, _, _ in
             }
+            
+            PPManager.sharedInstance.PPdatasvc.readBucket(
+                bucketName: PPManager.sharedInstance.PPusersvc.getMyAppGlobalDataStorageName(),
+                key: "UserToTeam")
+            { _, _, response in
+                guard var bucket = response?["UserToTeam"] as? [String: Any] else { return }
+                bucket[self.user.uo.handle] = answer
+                PPManager.sharedInstance.PPdatasvc.writeBucket(
+                    bucketName: PPManager.sharedInstance.PPusersvc.getMyAppGlobalDataStorageName(),
+                    key: "UserToTeam",
+                    value: bucket) { _, _, _ in }
+            }
+            
+            guard let multiChoice = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "multiChoice") as? MultiChoiceQuestionViewController else {
+                return
+            }
+            multiChoice.questions = questions.shuffled()
+            multiChoice.currentQuestion = 0
+            self.present(multiChoice, animated: true, completion: nil)
         }))
         
         self.present(alert, animated: true, completion: nil)

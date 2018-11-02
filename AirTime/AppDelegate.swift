@@ -33,10 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     cvc.present(vc, animated:true, completion:nil)
                 }
             } else {
-                let hvc:HomeViewController = sb.instantiateViewController(withIdentifier: "Air Time Scene") as! HomeViewController
-                if let u = user {
-//                    hvc.user = u
+                guard let hvc:HomeViewController = sb.instantiateViewController(withIdentifier: "Air Time Scene") as? HomeViewController
+                    , let user = user else {
+                        return
                 }
+                hvc.user = user
                 hvc.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal;
                 if let cvc = getCurrentViewController(rvc) {
                     print("userListener authd current VC: \(cvc )" );

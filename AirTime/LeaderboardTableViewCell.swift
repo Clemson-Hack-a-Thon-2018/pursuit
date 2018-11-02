@@ -1,19 +1,18 @@
 //
-//  LeadboardTableViewCell.swift
+//  TableViewCell.swift
 //  AirTime
 //
-//  Created by Lincoln Fraley on 10/19/18.
+//  Created by Lincoln Fraley on 11/2/18.
 //  Copyright © 2018 Dynepic, Inc. All rights reserved.
 //
 
 import UIKit
 
-class LeadboardTableViewCell: UITableViewCell {
+class LeaderboardTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
