@@ -409,7 +409,7 @@ class PPWebApi {
      // Read either the entire bucket (if Key=nil) - Returns a dictionary containing a data object (that can contain unspecified structure)
     // Read a single KV pair - Returns a dictionary containing a single pair  Ex: d = { thekey:thevalue };
     func readBucket(bucketName:String, key:String, completion: @escaping PPWebApiCompletion ) {
-        print("readBucket from bucket %@", bucketName)
+        print("readBucket from bucket:", bucketName)
         let urlString = baseUrl + "/app/v1/bucket" + "?id=" + bucketName + "&key=" +  key
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + self.at,

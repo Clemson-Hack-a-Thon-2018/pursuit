@@ -12,21 +12,17 @@ import UIKit
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var continueAsGuestButton: UIButton!
+    @IBOutlet weak var continueAsGuestButton: UIButton?
     @IBOutlet weak var loginView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.sizeToFit()
-        titleLabel.transform = titleLabel.transform.rotated(by: CGFloat(-(M_PI / 6)))
-        continueAsGuestButton.backgroundColor = .clear
-        continueAsGuestButton.layer.cornerRadius = continueAsGuestButton.frame.height / 2
-        continueAsGuestButton.layer.borderWidth = 1
-        continueAsGuestButton.layer.borderColor = UIColor.airtimeColors.yellow.cgColor
+     
+
         //PPLoginButton handles all auth flow
         let loginButton = PPLoginButton.init()
         loginButton.center = CGPoint(x: loginView.bounds.size.width  / 2,
-                                     y: loginView.bounds.size.height / 2)
+                                     y: loginView.bounds.size.height * (3 / 4))
         loginView.addSubview(loginButton)
     }
     

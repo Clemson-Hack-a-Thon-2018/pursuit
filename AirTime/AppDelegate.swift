@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 let hvc:HomeViewController = sb.instantiateViewController(withIdentifier: "Air Time Scene") as! HomeViewController
                 if let u = user {
-                    hvc.user = u
+//                    hvc.user = u
                 }
                 hvc.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal;
                 if let cvc = getCurrentViewController(rvc) {

@@ -16,116 +16,93 @@ class Stats : Codable {
     var totalJumpAttempts: Int!
     var maxSingleJumpCount:Int!
     var maxSingleHangTime:Double!
-    
-    init(json: Any) {
-        print("in Stats: json= \( json )" )
-        if let json2 = json as? [String: Any] {
-            totalJumps = json2["totalJumps"] as! Int
-            totalJumpAttempts = json2["totalJumpAttempts"] as! Int
-            maxSingleJumpCount = json2["maxSingleJumpCount"] as! Int
-            maxSingleHangTime = json2["maxSingleHangTime"] as! Double
-        }
-    }
 }
+    
 
-class HomeViewController: UIViewController, WCSessionDelegate, SKStoreProductViewControllerDelegate {
+class HomeViewController: UIViewController, SKStoreProductViewControllerDelegate {
+   
     
-    @IBOutlet weak var profilePicGradient: GradientBkgndView!
-    @IBOutlet weak var profilePicBlack: UIView!
-    @IBOutlet weak var profilePicImageView: UIImageView!
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var upperScoreLabel: UILabel!
-    @IBOutlet weak var lowerScoreLabel: UILabel!
-    @IBOutlet weak var leaderboardImageView: UIImageView!
+    @IBOutlet weak var teamLabel: UILabel!
     
-    var session: WCSession?
+    @IBAction func IBAction(_ sender: Any) {
+        // create the alert
+        let alert = UIAlertController(title: "Please Enter Your Team Name Below", message: nil, preferredStyle: .alert)
+        alert.addTextField()
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            let answer = alert.textFields![0]
+            // show the alert
+            
+            print("You entered \(String(describing: answer.text))")
+            
+            
+            
+            // write to this user's private data
+            let innerd = ["name": answer.text] as [String: Any]
+ PPManager.sharedInstance.PPdatasvc.writeBucket( bucketName:PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key:"TeamInfo", value:innerd ) { succeeded, response, responseObject in
+                if(!succeeded) {
+                    print("write JSON error:")
+                } else {
+                    PPManager.sharedInstance.PPdatasvc.readBucket(bucketName: PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key: "TeamInfo", completion: { (succeeded, response, responseObject) in
+                        if(succeeded) {
+//                            print("response read:" \(responseObject) as Any )
+                        }
+                    })
+                    
+                }
+            }
+            
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
-    var user:PPUserObject?
-    
-//    var myRawJumpData:RawJumpData!
-
-    var myStats:Stats = Stats(
-        json: [ "totalJumps": 0 as Int,
-                "totalJumpAttempts" : 0 as Int,
-                "maxSingleJumpCount":  0 as Int,
-            "maxSingleHangTime": 0.1 ] )
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profilePicGradient.layer.cornerRadius = profilePicGradient.frame.height / 2.0
-        profilePicGradient.clipsToBounds = true
-        profilePicBlack.layer.cornerRadius = profilePicBlack.frame.height / 2.0
-        profilePicImageView.layer.cornerRadius = profilePicImageView.frame.height / 2.0
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(leaderboardTapped(tapGestureRecognizer:)))
-        leaderboardImageView.isUserInteractionEnabled = true
-        leaderboardImageView.addGestureRecognizer(tapGestureRecognizer)
-        
-        if (WCSession.isSupported()) {
-            self.session = WCSession.default()
-            self.session?.delegate = self
-            self.session?.activate()
-        }
-        
-        let h = self.user?.uo.handle
-        let fu = self.user?.uo.firstName
-        let lu = self.user?.uo.lastName
-        if h != nil && fu != nil && lu != nil {
-            self.label.text = h! + " | " + fu! + " " + lu!
-
-            DispatchQueue.main.async {
-            PPManager.sharedInstance.PPusersvc.getProfilePic { succeeded, response, img in
-                if succeeded {
-                    if let i = img {
-                        self.profilePicImageView.image = i
-                        self.profilePicImageView.layer.masksToBounds = true
-
-                    }
-                }
-            }
-            }
+  
         }
     }
+
+/*
+    }
     
-    @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
+   // @IBAction func settingsTapped(_ sender: UIBarButtonItem) {
         guard let settings = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Settings") as? SettingsTableTableViewController else {
             print()
             return
         }
-        settings.user = user
-        present(settings, animated: true, completion: nil)
+//        settings.user = user
+  //      present(settings, animated: true, completion: nil)
     }
     
     @IBAction func playPORTALTapped(_ sender: UIBarButtonItem) {
-        Utils.openOrDownloadPlayPortal(delegate: self)
+ //       Utils.openOrDownloadPlayPortal(delegate: self)
     }
     
-    @objc func leaderboardTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+  //  @objc func leaderboardTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         guard let leaderboard = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "leaderboardTableViewController") as? LeaderboardTableViewController else {
             return
         }
-        present(leaderboard, animated: true, completion: nil)
+   //     present(leaderboard, animated: true, completion: nil)
     }
     
     func storeMyStatsToServer(completion: @escaping PPDataCompletion) {
-        if let s:String = PPManager.sharedInstance.PPusersvc.user.uo.handle {
-        let tnow = PPManager.sharedInstance.stringFromDate(date: Date())
-        let innerd = ["user": s,
-                      "Total jump count": myStats.totalJumps as Int,
-                      "Max single jump count":myStats.maxSingleJumpCount as Int,
-                      "Total jump attempts": myStats.totalJumpAttempts as Int,
-                      "Max hang time": myStats.maxSingleHangTime,
-                      "epoch": tnow] as [String: Any]
-            PPManager.sharedInstance.PPdatasvc.writeBucket( bucketName:PPManager.sharedInstance.PPusersvc.getMyAppGlobalDataStorageName(), key:s, value:innerd) { succeeded, response, responseObject in
-                if(!succeeded) { print("write JSON error:") }
+        if let _:String = PPManager.sharedInstance.PPusersvc.user.uo.handle {
+            _ = PPManager.sharedInstance.stringFromDate(date: Date())
+
+ 
             }
-        let service = PPLeaderboardService()
-        service.updateLeaderboard(score: myStats.totalJumps as NSNumber, categories: ["totalJumps"]) { _, _, _ in }
-        service.updateLeaderboard(score: myStats.maxSingleHangTime as NSNumber, categories: ["maxAirTime"]) { _, _, _ in }
+        
         }
-    }
+    
     
     func storeRawDataToServer(jumpCount:Int, longestJump: Double, completion: @escaping PPDataCompletion) {
+        /*
         let s:String = PPManager.sharedInstance.PPusersvc.user.uo.handle!
         let jc:NSNumber = jumpCount as NSNumber
         let lj: NSNumber = longestJump as NSNumber
@@ -134,28 +111,13 @@ class HomeViewController: UIViewController, WCSessionDelegate, SKStoreProductVie
         PPManager.sharedInstance.PPdatasvc.writeBucket( bucketName:PPManager.sharedInstance.PPusersvc.getMyAppGlobalDataStorageName(), key:s, value:innerd) { succeeded, response, responseObject in
             if(!succeeded) { print("write JSON error:") }
         }
+ */
     }
 
-    func updateStats(jumpCount:Int, longestJump: Double, completion: @escaping PPDataCompletion) {
-        myStats.totalJumps = myStats.totalJumps + jumpCount
-        myStats.totalJumpAttempts =  myStats.totalJumpAttempts + 1
-        if jumpCount > myStats.maxSingleJumpCount { myStats.maxSingleJumpCount = jumpCount }
-        if longestJump > myStats.maxSingleHangTime { myStats.maxSingleHangTime = longestJump }
-        return storeMyStatsToServer() { succeeded, response, responseObject in
-        }
-    }
+   
         
         
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        let total = applicationContext["totalJumps"] as! Int
-        let longest = Double(round(100*(applicationContext["longestJump"] as! Double))/100)
-        DispatchQueue.main.async {
-            self.upperScoreLabel.text = String(describing: total)
-            self.lowerScoreLabel.text = String(describing: longest)
-            self.updateStats(jumpCount:total, longestJump: longest) {  succeeded, response, responseObject in
-            }
-        }
-    }
+    
     
     func sessionDidDeactivate(_ session: WCSession) {
         print("diddeactivate")
@@ -173,3 +135,4 @@ class HomeViewController: UIViewController, WCSessionDelegate, SKStoreProductVie
         viewController.dismiss(animated: true, completion: nil)
     }
 }
+*/
