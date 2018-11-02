@@ -8,95 +8,108 @@
 
 import Foundation
 
-let dict : [String:Any] = ["question": "",
-                           "answer1": "",
-                           "answer2": "",
-                           "answer3": "",
-                           "answer4": "",
-                           "question1": [
-                                "questionText": "Jimmy Byrnes served as all of these positions except:",
-                                "answer1": "Associate Supreme Justice",
-                                "answer2": "Governor of SC",
-                                "answer3": "Clemson Student Body President",
-                                "answer4": "UN Ambassador",
-                                "right": "Clemson Student Body President"                            ],
-                           "question2": [
-                                "questionText": "One of Thomas Green Clemson’s favorite worldly possessions was a  Windsor chair formerly owned by which US president?",
-                                "answer1": "George Washington",
-                                "answer2": "Abe Lincoln",
-                                "answer3": "Thomas Jefferson",
-                                "answer4": "Benjamin Franklin",
-                                "right": "George Washington",
-                            ],
-                           "question3": [
-                                "questionText": "In 1977 this ACC team refused to play the Clemson Football team. In response, Clemson students stamped tiger paws onto 2 dollar bills as a way to encourage continuing the competition. Which team refused to play Clemson?",
-                                "answer1": "Virginia",
-                                "answer2": "North Carolina",
-                                "answer3": "Georgia Tech",
-                                "answer4": "NC State",
-                                "right": "Georgia Tech",
-                            ],
-                           
+struct Bucket {
+    
+    var name: String
+    var currentQuestion: String
+    var score: Int
+    var scoreHistory: [[String: Int]]
+    
+    var toJSON: [String: Any] {
+        get {
+            return [
+                "name": name,
+                "currentQuestion": currentQuestion,
+                "score": score,
+                "scoreHistory": scoreHistory
+            ]
+        }
+    }
+    
+    init(
+        name: String,
+        currentQuestion: String = "",
+        score: Int = 0,
+        scoreHistory: [[String: Int]] = [])
+    {
+        self.name = name
+        self.currentQuestion = currentQuestion
+        self.score = score
+        self.scoreHistory = scoreHistory
+    }
+    
+    init?(from json: [String: Any]) {
+        guard let name = json["name"] as? String
+            , let currentQuestion = json["currentQuestion"] as? String
+            , let score = json["score"] as? Int
+            , let scoreHistory = json["scoreHistory"] as? [[String: Int]]
+            else {
+                return nil
+        }
+        
+        self.init(name: name, currentQuestion: currentQuestion, score: score, scoreHistory: scoreHistory)
+    }
+    
+    
+}
+
+struct Question {
+    
+    let id: String
+    let question: String
+    let answers: [String]
+    let correctAnswer: String
+    
+    init?(from json: [String: Any]) {
+        guard let id = json["id"] as? String
+            , let question = json["question"] as? String
+            , let answers = json["answers"] as? [String]
+            , let correctAnswer = json["correctAnswer"] as? String
+            else {
+                return nil
+        }
+        
+        self.id = id
+        self.question = question
+        self.answers = answers
+        self.correctAnswer = correctAnswer
+    }
+}
+
+let jsonArray: [[String: Any]] = [
+    [
+        "id": "question1",
+        "question": "Jimmy Byrnes served as all of these positions except:",
+        "answers": [
+            "Associate Supreme Justice",
+            "Governor of SC",
+            "Clemson Student Body President",
+            "UN Ambassador"
+        ],
+        "correctAnswer": "Clemson Student Body President"
+    ],
+    [
+        "id": "question2",
+        "question": "One of Thomas Green Clemson’s favorite worldly possessions was a  Windsor chair formerly owned by which US president?",
+        "answers": [
+            "George Washington",
+            "Abe Lincoln",
+            "Thomas Jefferson",
+            "Benjamin Franklin"
+        ],
+        "correctAnswer": "George Washington"
+    ],
+    [
+        "id": "question3",
+        "question": "In 1977 this ACC team refused to play the Clemson Football team. In response, Clemson students stamped tiger paws onto 2 dollar bills as a way to encourage continuing the competition. Which team refused to play Clemson?",
+        "answers": [
+            "Virginia",
+            "North Carolina",
+            "Georgia Tech",
+            "NC State"
+        ],
+        "correctAnswer": "Georgia Tech"
+    ]
 ]
 
-
-/*
-
-PPManager.sharedInstance.PPdatasvc.writeBucket( bucketName:PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key:"Question1", value:dict["question1"] ) { succeeded, response, responseObject in
-    if(!succeeded) {
-        print("write JSON error:")
-    } else {
-        PPManager.sharedInstance.PPdatasvc.readBucket(bucketName: PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key: "Question1", completion: { (succeeded, response, responseObject) in
-            if(succeeded) {
-                //                            print("response read:" \(responseObject) as Any )
-            }
-        })
-        
-    }
-}
-
-}))
-
-self.present(alert, animated: true, completion: nil)
-}
-
-
-PPManager.sharedInstance.PPdatasvc.writeBucket( bucketName:PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key:"Question2", value:dict["question2"] ) { succeeded, response, responseObject in
-    if(!succeeded) {
-        print("write JSON error:")
-    } else {
-        PPManager.sharedInstance.PPdatasvc.readBucket(bucketName: PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key: "Question2", completion: { (succeeded, response, responseObject) in
-            if(succeeded) {
-                //                            print("response read:" \(responseObject) as Any )
-            }
-        })
-        
-    }
-}
-
-}))
-
-self.present(alert, animated: true, completion: nil)
-}
-
-
-
-PPManager.sharedInstance.PPdatasvc.writeBucket( bucketName:PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key:"Question3", value:dict["question3"] ) { succeeded, response, responseObject in
-    if(!succeeded) {
-        print("write JSON error:")
-    } else {
-        PPManager.sharedInstance.PPdatasvc.readBucket(bucketName: PPManager.sharedInstance.PPusersvc.getMyDataStorageName(), key: "Question3", completion: { (succeeded, response, responseObject) in
-            if(succeeded) {
-                //                            print("response read:" \(responseObject) as Any )
-            }
-        })
-        
-    }
-}
-
-}))
-
-self.present(alert, animated: true, completion: nil)
-}
-
-*/
+let questions = jsonArray.compactMap { Question(from: $0) }
